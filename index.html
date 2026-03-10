@@ -1587,7 +1587,7 @@ footer {
   opacity: 1;
 }
 
-/* Merchandise Swipe Styles - FIXED */
+/* Merchandise Swipe Styles - FIXED FOR SIDE BY SIDE ON ALL SCREENS */
 .merch-swipe-container {
   overflow: hidden;
   width: 100%;
@@ -1607,10 +1607,11 @@ footer {
   padding: 0 10px;
 }
 
+/* CRITICAL CHANGE: Always side by side, even on mobile */
 .merch-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr; /* Side by side on larger screens */
-  gap: 20px;
+  grid-template-columns: 1fr 1fr; /* Always 2 columns side by side */
+  gap: 15px;
   max-width: 800px;
   margin: 0 auto;
 }
@@ -1644,32 +1645,78 @@ footer {
   opacity: 0.8;
 }
 
-/* Mobile: stack vertically but still swipeable */
+/* Mobile adjustments - keep side by side but reduce gaps */
 @media (max-width: 600px) {
   .merch-grid {
-    grid-template-columns: 1fr; /* Stack on mobile */
-    max-width: 400px;
-  }
-  
-  .merch-wrapper {
-    width: 200%; /* Still 200% for swiping */
+    grid-template-columns: 1fr 1fr; /* STAY side by side on mobile */
+    gap: 10px; /* Smaller gap on mobile */
+    max-width: 100%; /* Full width on mobile */
   }
   
   .merch-slide {
-    width: 50%; /* Each slide still 50% */
+    padding: 0 5px; /* Smaller padding on mobile */
+  }
+}
+
+/* Very small screens - still side by side but tighter */
+@media (max-width: 360px) {
+  .merch-grid {
+    grid-template-columns: 1fr 1fr; /* STAY side by side */
+    gap: 8px;
+  }
+  
+  .merch-slide {
+    padding: 0 3px;
   }
 }
 
 /* Ensure cards in merch section are properly sized */
 #merch .card {
   max-width: 100%;
+  padding: 12px; /* Slightly smaller padding */
 }
 
 #merch .card img {
   max-width: 100%;
   height: auto;
-  max-height: 300px;
+  max-height: 200px; /* Smaller max height for side by side */
   object-fit: cover;
+  border-radius: 8px;
+}
+
+#merch .product-title {
+  font-size: 0.9rem; /* Slightly smaller text on mobile */
+  margin-bottom: 5px;
+}
+
+#merch .price {
+  font-size: 1rem;
+  margin: 5px 0;
+}
+
+/* Tablet and up - larger images */
+@media (min-width: 601px) {
+  #merch .card img {
+    max-height: 250px;
+  }
+  
+  #merch .product-title {
+    font-size: 1rem;
+  }
+}
+
+@media (min-width: 768px) {
+  #merch .card img {
+    max-height: 300px;
+  }
+  
+  .merch-grid {
+    gap: 20px;
+  }
+  
+  .merch-slide {
+    padding: 0 10px;
+  }
 }
 
 /* Responsive Breakpoints */
@@ -2264,7 +2311,7 @@ footer {
     <p class="swipe-hint"><i class="fas fa-hand-pointer" aria-hidden="true"></i> Swipe left or right to switch categories</p>
   </section>
 
-  <!-- Merchandise Section - SIDE BY SIDE LAYOUT -->
+  <!-- Merchandise Section - SIDE BY SIDE LAYOUT ON ALL SCREENS -->
   <section id="merch" class="fade-in" aria-labelledby="merch-heading">
     <h2 class="section-title" id="merch-heading">Merchandise</h2>
     <p class="section-text" style="text-align: center; margin: 0 auto 30px; max-width: 800px;">
@@ -2913,7 +2960,7 @@ function handleCardClick() {
 }
 
 // ==========================================
-// MERCHANDISE SWIPE FUNCTIONALITY - SIDE BY SIDE
+// MERCHANDISE SWIPE FUNCTIONALITY - SIDE BY SIDE ON ALL SCREENS
 // ==========================================
 
 function initMerchSwipe() {
